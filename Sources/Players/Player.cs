@@ -30,15 +30,17 @@ namespace BattleshipStateTracker.Sources.Players
             };
         }
 
-        // print the boards of player
+        // Print the boards of player
         public void PrintBoards()
         {
-            Console.WriteLine(Name + " PrimaryBoard: ");
+            Console.WriteLine(Name + "'s PrimaryBoard: ");
             PrimaryBoard.PrintBoard();
 
-            Console.WriteLine(Name + " TrackingBoard: ");
+            Console.WriteLine(Name + "'s TrackingBoard: ");
             TrackingBoard.PrintBoard();
         }
+
+        // Add ships randomly to the board
         public void AddShips()
         {
             Random rand = new Random(Guid.NewGuid().GetHashCode());
@@ -53,37 +55,38 @@ namespace BattleshipStateTracker.Sources.Players
             }
         }
 
+        // Process shot taken by opponent
         public int ProcessShot(Point p)
         {
             int Result = PrimaryBoard.ReceiveShot(p);
             if( Result == 0)
             {
-                Console.WriteLine("Shot miss");
+                Console.WriteLine("Shot miss.");
             }
             else 
             {
                 var ship = Ships.First(x => x.Id == Result);
                 ship.Hits++;
 
-                Console.WriteLine(ship.Name + " is Hit");
+                Console.WriteLine(ship.Name + " is Hit.");
                 if(ship.IsSunk)
                 {
-                    Console.WriteLine(ship.Name + " is Sunk");
+                    Console.WriteLine(ship.Name + " is Sunk.");
                 }
             }
             return Result;
         }
 
+        // Report result of shot on tracking board
         public void ReportShot(Point p, int Result)
         {
             TrackingBoard.ReportShot(p, Result);
         }
 
+        // If the player is lost
         public bool IsLost()
         {
                 return Ships.All(x => x.IsSunk);
         }
-        
-
     }
 }

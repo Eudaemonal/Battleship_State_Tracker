@@ -64,7 +64,7 @@ namespace BattleshipStateTracker.Sources.Boards
         }
 
 
-        // Place ship on the game board
+        // Place ship on the primary board
         public bool PlaceShip(Point p0, bool horizontal, Ship ship)
         {
             // Calculate the end point p1 based on start point p0
@@ -100,7 +100,7 @@ namespace BattleshipStateTracker.Sources.Boards
             return true;
         }
 
-        // Process the status of primary board after the enemy take a shot at p
+        // Process the status of primary board after the opponent take a shot at p
         // return ShipId if hit, 0 if miss
         public int ReceiveShot(Point p)
         {
@@ -115,7 +115,7 @@ namespace BattleshipStateTracker.Sources.Boards
             return square.ShipId;
         }
 
-        // Process the status of secondary board after take a shot
+        // Process the status of tracking board after take a shot
         public void ReportShot(Point p, int Result)
         {
             var square = this.At(p);

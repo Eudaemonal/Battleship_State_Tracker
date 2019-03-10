@@ -12,15 +12,14 @@ This is the Battleship State Tracker .NET Core project.
 ## Design
 BattleshipStateTracker/ 
 ├── Program.cs  : Battleship state-tracker program  
-├── Sources/    : Contains primary codes of the program
+├── Sources/    : Contains source files of the program
 └── Utils/      : Classes to Support the program
-
 
 ## How to use
 1. Open the project directory in Visual Studio Code
 2. In the terminal, Run the program: ```dotnet run```
-3. The program will simulate Player1 attacking Player2 in the first round, choose a point to attack, eg: ```3 5```
-4. After the attacking, the new board will be shown
+3. The program simulates Player1 attacking Player2 in the first round, choose a point to attack, eg: ```3 5```
+4. After the attacking, the result will be shown
 
 
 ## Reference

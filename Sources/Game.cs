@@ -15,7 +15,6 @@ namespace BattleshipStateTracker.Sources
             Player2 = new Player(name2);
         }
 
-
         public void Run()
         {
             Point target = new Point(0,0);

@@ -9,7 +9,6 @@ namespace BattleshipStateTracker.Sources.Boards
         public Point Coordinate{get; set; }
         public int ShipId {get; set; }
 
-        // Constructor
         public Square(int x, int y)
         {
             Coordinate = new Point(x, y);
@@ -26,7 +25,5 @@ namespace BattleshipStateTracker.Sources.Boards
         {
             return Type == SquareType.Empty;
         }
-
-
     }
 }
