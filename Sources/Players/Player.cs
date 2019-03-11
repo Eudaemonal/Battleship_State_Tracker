@@ -68,10 +68,10 @@ namespace BattleshipStateTracker.Sources.Players
                 var ship = Ships.First(x => x.Id == result);
                 ship.Hits++;
 
-                Console.WriteLine(ship.Name + " is Hit.");
+                Console.WriteLine(Name + "'s " + ship.Name + " is Hit.");
                 if(ship.IsSunk)
                 {
-                    Console.WriteLine(ship.Name + " is Sunk.");
+                    Console.WriteLine(Name + "'s " + ship.Name + " is Sunk.");
                 }
             }
             else
