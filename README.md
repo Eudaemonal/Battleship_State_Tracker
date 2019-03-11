@@ -10,10 +10,10 @@ This is the Battleship State Tracker .NET Core project.
 
 
 ## Design
-BattleshipStateTracker/ 
+BattleshipStateTracker/  
 ├── Program.cs  : Battleship state-tracker program  
-├── Sources/    : Contains source files of the program
-└── Utils/      : Classes to Support the program
+├── Sources/    : Contains source files of the program  
+└── Utils/      : Classes to Support the program  
 
 ## How to use
 1. Open the project directory in Visual Studio Code
