@@ -8,15 +8,17 @@ using System.Linq;
 namespace BattleshipStateTracker.Sources.Boards
 {
     public class Board{
+        public int Size{get; set; }
         public List<Square> Grid{get; set; }
 
         // Create an empty board
         public Board()
         {
             Grid = new List<Square>();
-            for(int i = 1; i <= 10; i++)
+            Size = 10;
+            for(int i = 1; i <= Size; i++)
             {
-                for(int j = 1; j <= 10; j++)
+                for(int j = 1; j <= Size; j++)
                 {
                     Grid.Add(new Square(i, j));
                 }
@@ -43,9 +45,9 @@ namespace BattleshipStateTracker.Sources.Boards
         // Print the board
         public void PrintBoard()
         {
-            for(int i = 1; i <= 10; i++)
+            for(int i = 1; i <= Size; i++)
             {
-                for(int j = 1; j <= 10; j++)
+                for(int j = 1; j <= Size; j++)
                 {
                     Console.Write((int)this.At(new Point(i, j)).Type + " ");
                 }
@@ -56,7 +58,7 @@ namespace BattleshipStateTracker.Sources.Boards
         // Check if the coordinate within the board
         public bool IsValidCoordinate(Point p)
         {
-            if(1 <= p.Row && p.Row <= 10 && 1 <= p.Col && p.Col <= 10 )
+            if(1 <= p.Row && p.Row <= Size && 1 <= p.Col && p.Col <= Size )
             {
                 return true;
             }
@@ -101,9 +103,13 @@ namespace BattleshipStateTracker.Sources.Boards
         }
 
         // Process the status of primary board after the opponent take a shot at p
-        // return ShipId if hit, 0 if miss
+        // return ShipId if hit, 0 if miss, -1 if invalid
         public int ReceiveShot(Point p)
         {
+            if(!IsValidCoordinate(p))
+            {
+                return -1;
+            }
             Square square = this.At(p);
             if(square.IsEmpty())
             {
@@ -116,16 +122,26 @@ namespace BattleshipStateTracker.Sources.Boards
         }
 
         // Process the status of tracking board after take a shot
-        public void ReportShot(Point p, int Result)
+        public void ReportShot(Point p, int result)
         {
+            if(!IsValidCoordinate(p))
+            {
+                Console.WriteLine("Invalid shot coordinate");
+                Environment.Exit(1);
+            }
             var square = this.At(p);
-            if(Result == 0 )
+            if(result == 0 )
             {
                 square.Type = SquareType.Miss;
             }
-            else
+            else if(result > 0)
             {
                 square.Type = SquareType.Hit;
+            }
+            else
+            {
+                Console.WriteLine("Invalid shot result");
+                Environment.Exit(1);
             }
         }
     }

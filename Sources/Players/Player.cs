@@ -48,7 +48,7 @@ namespace BattleshipStateTracker.Sources.Players
             {
                 bool IsAdded = false;
                 while(!IsAdded){
-                    Point p0 = new Point(rand.Next(1,11), rand.Next(1,11));
+                    Point p0 = new Point(rand.Next(1,PrimaryBoard.Size + 1), rand.Next(1,PrimaryBoard.Size + 1));
                     bool horizontal = Convert.ToBoolean(rand.Next(2));
                     IsAdded = PrimaryBoard.PlaceShip(p0, horizontal, ship);
                 }
@@ -58,14 +58,14 @@ namespace BattleshipStateTracker.Sources.Players
         // Process shot taken by opponent
         public int ProcessShot(Point p)
         {
-            int Result = PrimaryBoard.ReceiveShot(p);
-            if( Result == 0)
+            int result = PrimaryBoard.ReceiveShot(p);
+            if( result == 0)
             {
                 Console.WriteLine("Shot miss.");
             }
-            else 
+            else if(result > 0)
             {
-                var ship = Ships.First(x => x.Id == Result);
+                var ship = Ships.First(x => x.Id == result);
                 ship.Hits++;
 
                 Console.WriteLine(ship.Name + " is Hit.");
@@ -74,13 +74,17 @@ namespace BattleshipStateTracker.Sources.Players
                     Console.WriteLine(ship.Name + " is Sunk.");
                 }
             }
-            return Result;
+            else
+            {
+                Console.WriteLine("Coordinate is Invalid.");
+            }
+            return result;
         }
 
         // Report result of shot on tracking board
-        public void ReportShot(Point p, int Result)
+        public void ReportShot(Point p, int result)
         {
-            TrackingBoard.ReportShot(p, Result);
+            TrackingBoard.ReportShot(p, result);
         }
 
         // If the player is lost

@@ -24,10 +24,13 @@ namespace BattleshipStateTracker.Sources
             while(!Player1.IsLost() && !Player2.IsLost())
             {
                 // Player 1 Attack first
-                tokens = Console.ReadLine().Split();
-                target.Set(int.Parse(tokens[0]), int.Parse(tokens[1]));
+                result = -1;
+                while(result == -1){
+                    tokens = Console.ReadLine().Split();
+                    target.Set(int.Parse(tokens[0]), int.Parse(tokens[1]));
 
-                result = Player2.ProcessShot(target);
+                    result = Player2.ProcessShot(target);
+                }
                 Player1.ReportShot(target, result);
 
                 if(Player2.IsLost())
@@ -37,10 +40,13 @@ namespace BattleshipStateTracker.Sources
                 }
 
                 // Player 2 Attack next
-                tokens = Console.ReadLine().Split();
-                target.Set(int.Parse(tokens[0]), int.Parse(tokens[1]));
+                result = -1;
+                while(result == -1){
+                    tokens = Console.ReadLine().Split();
+                    target.Set(int.Parse(tokens[0]), int.Parse(tokens[1]));
 
-                result = Player1.ProcessShot(target);
+                    result = Player1.ProcessShot(target);
+                }
                 Player2.ReportShot(target, result);
                 
                 if(Player1.IsLost()){

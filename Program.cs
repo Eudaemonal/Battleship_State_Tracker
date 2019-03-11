@@ -4,6 +4,7 @@ using BattleshipStateTracker.Utils;
 
 using System;
 
+
 namespace BattleshipStateTracker
 {
     class Program
@@ -24,11 +25,14 @@ namespace BattleshipStateTracker
 
             // Take an “attack” at a given position, and report back  
             // whether the attack resulted in a hit or a miss
-            Console.WriteLine("Enter a point to attack: ");
-            string[] tokens = Console.ReadLine().Split();
-            Point target = new Point(int.Parse(tokens[0]), int.Parse(tokens[1]));
-
-            int result = p2.ProcessShot(target);
+            Point target = new Point(0, 0);
+            int result = -1;
+            while(result == -1){
+                Console.WriteLine("Enter a point to attack: ");
+                string[] tokens = Console.ReadLine().Split();
+                target.Set(int.Parse(tokens[0]), int.Parse(tokens[1]));
+                result = p2.ProcessShot(target);
+            }
             p1.ReportShot(target, result);
 
             // Return whether the player has lost the game yet
